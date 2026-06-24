@@ -34,27 +34,27 @@ jobs:
       - name: Check out the codebase
         uses: actions/checkout@v5
         with:
-          path: jahrik.nvim
+          path: jahrik.mac_workstation
       - name: Set up Python 3
         uses: astral-sh/setup-uv@v8.1.0
         with:
           python-version: "3.12"
       - name: Install test dependencies
-        working-directory: jahrik.nvim
+        working-directory: jahrik.mac_workstation
         run: uv sync
       - name: Install Galaxy role requirements
-        working-directory: jahrik.nvim
+        working-directory: jahrik.mac_workstation
         run: uv run ansible-galaxy role install -r molecule/localhost/requirements.yml -p ${{ github.workspace }}
       - name: Install Galaxy collection requirements
-        working-directory: jahrik.nvim
+        working-directory: jahrik.mac_workstation
         run: uv run ansible-galaxy collection install -r molecule/localhost/requirements.yml
       - name: Run converge
-        working-directory: jahrik.nvim
+        working-directory: jahrik.mac_workstation
         env:
           ANSIBLE_ROLES_PATH: ${{ github.workspace }}
         run: uv run ansible-playbook molecule/localhost/converge.yml -i "localhost," -c local
       - name: Run verify
-        working-directory: jahrik.nvim
+        working-directory: jahrik.mac_workstation
         env:
           ANSIBLE_ROLES_PATH: ${{ github.workspace }}
         run: uv run ansible-playbook molecule/localhost/verify.yml -i "localhost," -c local
