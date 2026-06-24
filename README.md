@@ -48,8 +48,7 @@ uv sync
 source .venv/bin/activate
 yamllint .
 ansible-lint
-molecule converge -s localhost
-molecule verify -s localhost
+molecule test
 ```
 
 ## License
