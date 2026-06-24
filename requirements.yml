@@ -1,0 +1,5 @@
+---
+roles:
+  - name: jahrik.ghostty
+  - name: jahrik.zsh
+  - name: jahrik.nvim

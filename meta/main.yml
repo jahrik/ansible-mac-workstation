@@ -1,0 +1,22 @@
+---
+galaxy_info:
+  role_name: mac_workstation
+  author: jahrik
+  namespace: jahrik
+  description: Installs a macOS development workstation
+  issue_tracker_url: https://github.com/jahrik/ansible-mac-workstation/issues
+  min_ansible_version: '2.16'
+  license: MIT
+  platforms:
+    - name: macOS
+      versions:
+        - all
+  galaxy_tags:
+    - workstation
+    - macos
+    - homebrew
+    - zsh
+    - ghostty
+    - nvim
+
+dependencies: []

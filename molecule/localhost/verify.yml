@@ -1,0 +1,64 @@
+---
+- name: Verify
+  hosts: all
+  gather_facts: true
+  tasks:
+    - name: Check Homebrew is available
+      ansible.builtin.command: which brew
+      register: brew_bin
+      changed_when: false
+
+    - name: Assert Homebrew is installed
+      ansible.builtin.assert:
+        that: brew_bin.rc == 0
+        fail_msg: "brew not found on PATH"
+
+    - name: Check git is installed via Homebrew
+      ansible.builtin.command: brew list git
+      register: brew_git
+      changed_when: false
+
+    - name: Assert git is installed
+      ansible.builtin.assert:
+        that: brew_git.rc == 0
+        fail_msg: "git not installed via Homebrew"
+
+    - name: Check ghostty app bundle
+      ansible.builtin.stat:
+        path: /Applications/Ghostty.app
+      register: ghostty_app
+
+    - name: Assert ghostty is installed
+      ansible.builtin.assert:
+        that: ghostty_app.stat.exists
+        fail_msg: "Ghostty.app not found at /Applications/Ghostty.app"
+
+    - name: Check ghostty config file
+      ansible.builtin.stat:
+        path: ~/.config/ghostty/config
+      register: ghostty_cfg
+
+    - name: Assert ghostty config exists
+      ansible.builtin.assert:
+        that: ghostty_cfg.stat.exists
+        fail_msg: "ghostty config not found at ~/.config/ghostty/config"
+
+    - name: Check zsh config
+      ansible.builtin.stat:
+        path: ~/.zshrc
+      register: zshrc
+
+    - name: Assert zshrc exists
+      ansible.builtin.assert:
+        that: zshrc.stat.exists
+        fail_msg: "~/.zshrc not found"
+
+    - name: Check nvim config
+      ansible.builtin.stat:
+        path: ~/.config/nvim
+      register: nvim_cfg
+
+    - name: Assert nvim config exists
+      ansible.builtin.assert:
+        that: nvim_cfg.stat.isdir
+        fail_msg: "~/.config/nvim directory not found"
