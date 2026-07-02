@@ -2,4 +2,3 @@
 - name: Install base Homebrew packages
   community.general.homebrew:
     name: "{{ base_packages }}"
-    state: present

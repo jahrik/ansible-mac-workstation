@@ -29,6 +29,23 @@ macOS (all versions with Homebrew support).
 | jahrik.zsh | [![CI](https://github.com/jahrik/ansible-zsh/actions/workflows/cicd.yml/badge.svg)](https://github.com/jahrik/ansible-zsh/actions/workflows/cicd.yml) |
 | jahrik.nvim | [![CI](https://github.com/jahrik/ansible-nvim/actions/workflows/cicd.yml/badge.svg)](https://github.com/jahrik/ansible-nvim/actions/workflows/cicd.yml) |
 
+## Tags
+
+Run or skip parts of the role with tags:
+
+```bash
+ansible-playbook playbook.yml --tags mac_workstation:homebrew
+ansible-playbook playbook.yml --skip-tags mac_workstation:nvim
+```
+
+| Tag | Scope |
+|---|---|
+| `mac_workstation` | All role tasks |
+| `mac_workstation:homebrew` | Homebrew packages only |
+| `mac_workstation:ghostty` | jahrik.ghostty only |
+| `mac_workstation:zsh` | jahrik.zsh only |
+| `mac_workstation:nvim` | jahrik.nvim only |
+
 ## Example Playbook
 
 ```yaml

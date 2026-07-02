@@ -1,0 +1,41 @@
+---
+argument_specs:
+  main:
+    short_description: Install a macOS development workstation
+    options:
+      install:
+        type: bool
+        default: true
+        description: Set to false to uninstall
+      time_zone:
+        type: str
+        default: US/Pacific
+        description: System timezone
+      base_packages:
+        type: list
+        elements: str
+        default:
+          - fd
+          - git
+          - htop
+          - jq
+          - ripgrep
+          - tree
+          - wget
+        description: Homebrew formulae to install
+      editor:
+        type: str
+        default: nvim
+        description: Default editor (passed to jahrik.zsh)
+      lang:
+        type: str
+        default: en_US.UTF-8
+        description: Locale (passed to jahrik.zsh)
+      python_force_color:
+        type: int
+        default: 1
+        description: PY_COLORS env var value
+      ansible_force_color:
+        type: int
+        default: 1
+        description: ANSIBLE_FORCE_COLOR env var value

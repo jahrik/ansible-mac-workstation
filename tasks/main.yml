@@ -1,15 +1,44 @@
 ---
 - name: Install Homebrew packages
-  ansible.builtin.include_tasks: homebrew.yml
+  ansible.builtin.include_tasks:
+    file: homebrew.yml
+    apply:
+      tags:
+        - mac_workstation
+        - mac_workstation:homebrew
+  tags:
+    - mac_workstation
+    - mac_workstation:homebrew
 
 - name: Install ghostty
   ansible.builtin.include_role:
     name: jahrik.ghostty
+    apply:
+      tags:
+        - mac_workstation
+        - mac_workstation:ghostty
+  tags:
+    - mac_workstation
+    - mac_workstation:ghostty
 
 - name: Install and configure zsh
   ansible.builtin.include_role:
     name: jahrik.zsh
+    apply:
+      tags:
+        - mac_workstation
+        - mac_workstation:zsh
+  tags:
+    - mac_workstation
+    - mac_workstation:zsh
 
 - name: Install nvim
   ansible.builtin.include_role:
     name: jahrik.nvim
+    apply:
+      tags:
+        - mac_workstation
+        - mac_workstation:nvim
+  tags:
+    - mac_workstation
+    - mac_workstation:nvim
