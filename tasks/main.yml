@@ -10,17 +10,6 @@
     - mac_workstation
     - mac_workstation:homebrew
 
-- name: Install ghostty
-  ansible.builtin.include_role:
-    name: jahrik.ghostty
-    apply:
-      tags:
-        - mac_workstation
-        - mac_workstation:ghostty
-  tags:
-    - mac_workstation
-    - mac_workstation:ghostty
-
 - name: Install and configure zsh
   ansible.builtin.include_role:
     name: jahrik.zsh
@@ -42,3 +31,46 @@
   tags:
     - mac_workstation
     - mac_workstation:nvim
+
+- name: Install and configure AI coding agents
+  ansible.builtin.include_role:
+    name: jahrik.ai_agents
+    apply:
+      tags:
+        - mac_workstation
+        - mac_workstation:ai_agents
+  vars:
+    # Claude Code only on this host — no AGY/Antigravity.
+    ai_agents_install:
+      agy: false
+      claude_code: true
+      cli_tools: false
+      repo_sync: true
+    # Claude-only symlinks: drop the four ~/.gemini/config/* entries that
+    # ai_agents_symlinks ships by default (AGY isn't installed here).
+    ai_agents_symlinks:
+      - src: "{{ ai_agents_config_dest }}/skills"
+        dest: "{{ ansible_facts['env']['HOME'] }}/.claude/skills"
+      - src: "{{ ai_agents_config_dest }}/agents"
+        dest: "{{ ansible_facts['env']['HOME'] }}/.claude/agents"
+      - src: "{{ ai_agents_config_dest }}/AGENTS.md"
+        dest: "{{ ansible_facts['env']['HOME'] }}/.claude/CLAUDE.md"
+    # Trim to the servers actually useful solo and actually installable.
+    # dispatcher/lsp/memory were archived upstream in mcp-servers#79 (no
+    # console scripts, nothing for `uv tool install` to build) — github is
+    # skipped as the self-hosted App server isn't wired up on this host.
+    ai_agents_mcp_servers:
+      - name: ws
+        type: stdio
+        command: "{{ ai_agents_mcp_workspace_bin }}"
+        args: []
+        env:
+          MCP_WORKSPACE_ROOT: "{{ ai_agents_mcp_workspace_root }}"
+      - name: data
+        type: stdio
+        command: "{{ ai_agents_mcp_data_bin }}"
+        args: []
+        env: {}
+  tags:
+    - mac_workstation
+    - mac_workstation:ai_agents

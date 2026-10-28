@@ -25,9 +25,9 @@ macOS (all versions with Homebrew support).
 
 | Role | CI |
 |------|----|
-| jahrik.ghostty | [![CI](https://github.com/jahrik/ansible-ghostty/actions/workflows/cicd.yml/badge.svg)](https://github.com/jahrik/ansible-ghostty/actions/workflows/cicd.yml) |
 | jahrik.zsh | [![CI](https://github.com/jahrik/ansible-zsh/actions/workflows/cicd.yml/badge.svg)](https://github.com/jahrik/ansible-zsh/actions/workflows/cicd.yml) |
 | jahrik.nvim | [![CI](https://github.com/jahrik/ansible-nvim/actions/workflows/cicd.yml/badge.svg)](https://github.com/jahrik/ansible-nvim/actions/workflows/cicd.yml) |
+| jahrik.ai_agents | [![CI](https://github.com/jahrik/ansible-ai-agents/actions/workflows/cicd.yml/badge.svg)](https://github.com/jahrik/ansible-ai-agents/actions/workflows/cicd.yml) |
 
 ## Tags
 
@@ -42,9 +42,9 @@ ansible-playbook playbook.yml --skip-tags mac_workstation:nvim
 |---|---|
 | `mac_workstation` | All role tasks |
 | `mac_workstation:homebrew` | Homebrew packages only |
-| `mac_workstation:ghostty` | jahrik.ghostty only |
 | `mac_workstation:zsh` | jahrik.zsh only |
 | `mac_workstation:nvim` | jahrik.nvim only |
+| `mac_workstation:ai_agents` | jahrik.ai_agents only |
 
 ## Example Playbook
 

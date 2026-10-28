@@ -23,26 +23,6 @@
         that: brew_git.rc == 0
         fail_msg: "git not installed via Homebrew"
 
-    - name: Check ghostty app bundle
-      ansible.builtin.stat:
-        path: /Applications/Ghostty.app
-      register: ghostty_app
-
-    - name: Assert ghostty is installed
-      ansible.builtin.assert:
-        that: ghostty_app.stat.exists
-        fail_msg: "Ghostty.app not found at /Applications/Ghostty.app"
-
-    - name: Check ghostty config file
-      ansible.builtin.stat:
-        path: ~/.config/ghostty/config
-      register: ghostty_cfg
-
-    - name: Assert ghostty config exists
-      ansible.builtin.assert:
-        that: ghostty_cfg.stat.exists
-        fail_msg: "ghostty config not found at ~/.config/ghostty/config"
-
     - name: Check zsh config
       ansible.builtin.stat:
         path: ~/.zshrc
@@ -62,3 +42,23 @@
       ansible.builtin.assert:
         that: nvim_cfg.stat.isdir
         fail_msg: "~/.config/nvim directory not found"
+
+    - name: Check Claude Code global config symlink
+      ansible.builtin.stat:
+        path: ~/.claude/CLAUDE.md
+      register: claude_md
+
+    - name: Assert CLAUDE.md is a symlink into the agent config repo
+      ansible.builtin.assert:
+        that: claude_md.stat.islnk
+        fail_msg: "~/.claude/CLAUDE.md not found or not a symlink"
+
+    - name: Check Claude Code agents symlink
+      ansible.builtin.stat:
+        path: ~/.claude/agents
+      register: claude_agents
+
+    - name: Assert agents directory is a symlink into the agent config repo
+      ansible.builtin.assert:
+        that: claude_agents.stat.islnk
+        fail_msg: "~/.claude/agents not found or not a symlink"

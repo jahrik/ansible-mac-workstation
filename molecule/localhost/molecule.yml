@@ -1,6 +1,8 @@
 ---
+prerun: false
 dependency:
   name: galaxy
+  enabled: false
   options:
     requirements-file: requirements.yml
 driver:

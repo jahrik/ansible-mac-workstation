@@ -20,15 +20,16 @@ Ansible meta-role that configures a macOS development workstation. Composes jahr
 
 `tasks/main.yml`:
 1. `homebrew.yml` - Install base Homebrew packages
-2. `jahrik.ghostty` - Terminal emulator
-3. `jahrik.zsh` - Zsh with Powerlevel10k
-4. `jahrik.nvim` - Neovim with lazy.nvim and LSP
+2. `jahrik.zsh` - Zsh with Powerlevel10k
+3. `jahrik.nvim` - Neovim with lazy.nvim and LSP
+4. `jahrik.ai_agents` - Claude Code config (skills/agents/CLAUDE.md symlinks, `ws`/`data`/`lsp`/`memory`
+   MCP servers). AGY and the Linux-pinned CLI tool installer are disabled via `vars:` on this step.
 
 ## Dependencies (installed via `requirements.yml`)
 
-- `jahrik.ghostty` - Ghostty terminal (depends on `jahrik.nerd_fonts`)
 - `jahrik.zsh` - Zsh shell configuration
 - `jahrik.nvim` - Neovim (depends on `jahrik.nerd_fonts`)
+- `jahrik.ai_agents` - AI coding agent config (Claude Code only on this host)
 
 ## Testing
 
